@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"
+         xmlns="http://www.w3.org/1999/xhtml"
+         xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+         xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+         layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+<h2>Welcome to dashboard</h2>
+
+    <br/>
+    <!--<div th:text="${T(com.sit.jbc.domain.dto.security.AccessPermission).getCurrentPermissions()}"></div>-->
+    <a href="/security/logout">Logout</a>
+<br/>
+</div>
+<!-- kaj kore dilam, khaway diyen anindya -->

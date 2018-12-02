@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="common/layout/base">
+<head>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet"  type='text/css'>
+</head>
+<div layout:fragment="content">
+    <!--<p th:text="${countryData}"></p>-->
+    <div class="x_title">
+        <h2><small>System & Setting > Country Setup </small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <form name="addForm" class="form-horizontal form-label-left" id="addButton" th:action="@{/generic/countrySetup}"
+              th:object="${country}" method="post">
+            <span class="section">Country Entry</span>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Country Name<span
+                                class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12"  name="countryName" placeholder="" type="text" required="required" />
+                            <span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="countryId"  />
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="countryShortName">Country Short Name <span
+                            class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="countryShortName" class="form-control col-md-7 col-xs-12" name="countryShortName" required="required" placeholder=""
+                               type="text"/><span class="nameError"></span>
+                        <input type="hidden" id="id" value="-1" name="countryId"/>
+                    </div>
+                </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nationality">Nationality <span
+                                class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="nationality" class="form-control col-md-7 col-xs-12" name="nationality" required="required" placeholder=""
+                                   type="text"/><span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="countryId"/>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phoneCode">Phone Code <span
+                                class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="phoneCode" class="form-control col-md-7 col-xs-12" name="phoneCode" required="required" placeholder=""
+                                   type="text"/><span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="countryId"/>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Status
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="isActiv" name="isActiv">
+                            <input type="radio"  id="isActiveYes" name="isActive" th:value="1" th:text="Active"/>
+                            <input type="radio"  id="isActiveNo" name="isActive" th:value="0" th:text="Inactive"/>
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="btn btn-success" name="save" value="save">Save</button>
+                            <input type="button" class="btn btn-primary"  id="refreshButton" th:value="Refresh"  onclick="formRefresh()">
+                        </div>
+                    </div>
+                </div>
+                <div class="x_content" id="tableOffice">
+
+                    <table id="listTable" class="table table-striped table-bordered bulk_action">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Country Name</th>
+                            <th>Country Short Name</th>
+                            <th>Nationality</th>
+                            <th>Phone Code</th>
+                            <th>Entry Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="ctry : ${countries}">
+                            <td class="countryID" th:text="${ctry.countryId}"></td>
+                            <td class="countryName" th:text="${ctry.countryName}"></td>
+                            <td th:text="${ctry.countryShortName}"></td>
+                            <td th:text="${ctry.nationality}"></td>
+                            <td th:text="${ctry.phoneCode}"></td>
+                            <td>
+                                <span th:if="${ctry.isMigrated == 1}">Migrated</span>
+                                <span th:if="${ctry.isMigrated == 0}">New</span>
+                            </td>
+                            <td>
+                                <span th:if="${ctry.isActive == 1}">Active</span>
+                                <span th:if="${ctry.isActive == 0}">Inactive</span>
+                            </td>
+                            <td>
+                                <div class="col-xs-6 previous">
+                                    <a class="btn btn-info" id="editButton" th:value="Edit" th:attr="data-id=${ctry.countryId}" onclick="formEdit(this)"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+
+<div layout:fragment="script">
+    <script src="../js/generic/country.js"></script>
+</div>

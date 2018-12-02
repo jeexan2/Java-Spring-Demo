@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<form th:fragment="general_form_part" name="form_general" class="form-horizontal form-label-left"
+      action="/hrm_admin/employee_general_setup" modelAttribute="employeemodel" enctype="multipart/form-data" method="POST">
+    <div class="x_title">
+        <br/>
+        <h2>General Information
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="general_form">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="item form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-2"
+                           for="emp_name_id">Employee Name
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <input class="form-control col-md-7 col-xs-12"
+                               name="empNmEng" id="emp_name_id" th:value="${employee?.empNmEng}" type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="item form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-2"
+                           for="emp_bn_name_id">Employee Name(Bangla)
+                    </label>
+                    <div class="col-md-10 col-sm-10 col-xs-10">
+                        <input class="form-control col-md-7 col-xs-12"
+                               name="empNmBng" id="emp_bn_name_id" th:value="${employee?.empNmBng}" type="text"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_type_id">Employee Type
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_type_id"
+                                name="employmentTypeId">
+                            <option th:each="empType : ${employmentTypeList}"
+                                    th:value="${empType.lookupId}"
+                                    th:selected="${empType.lookupId == employee?.employmentTypeId}"
+                                    th:text="${empType.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_id">Employee ID
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" name="empId" th:value="${employee?.empId}"
+                               id="emp_id" type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_file_id">Employee File No
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" th:value="${employee?.empFileNo}"
+                               name="empFileNo" id="emp_file_id" type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_cat_id">Employee Category
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_cat_id"
+                                name="employeeTypeId">
+                            <option th:each="empCat : ${employeeType}"
+                                    th:value="${empCat.lookupId}"
+                                    th:selected="${empCat.lookupId == employee?.employeeTypeId}"
+                                    th:text="${empCat.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_dob_id">Date of Birth
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12 datepicker"
+                               th:value="${#dates.format(employee.birthDt, 'dd/MM/yyyy')}"
+                               name="birthDt" id="emp_dob_id" type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_sex_id">Sex
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_sex_id"
+                                name="genderId">
+                            <option th:each="empGender : ${employeeGenderList}"
+                                    th:value="${empGender.lookupId}"
+                                    th:selected="${empGender.lookupId == employee?.genderId}"
+                                    th:text="${empGender.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_religion_id">Religion
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_religion_id"
+                                name="religionId">
+                            <option th:each="empReligion : ${employeeReligionList}"
+                                    th:value="${empReligion.lookupId}"
+                                    th:selected="${empReligion.lookupId == employee?.religionId}"
+                                    th:text="${empReligion.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_mar_id">Marital Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_mar_id"
+                                name="maritalStatCd">
+                            <option th:each="empMarital : ${employeeMarList}"
+                                    th:value="${empMarital.lookupId}"
+                                    th:text="${empMarital.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_desig_id">Designation
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_desig_id"
+                                name="designationId">
+                            <option th:each="empDesig : ${employeeDesigList}"
+                                    th:value="${empDesig.designationId}"
+                                    th:selected="${empDesig.designationId == employee?.designationId}"
+                                    th:text="${empDesig.designationName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_grade_id">Grade
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_grade_id"
+                                name="gradeId">
+                            <option th:each="empGrade : ${employeeGradeList}"
+                                    th:value="${empGrade.gradeId}"
+                                    th:selected="${empGrade.gradeId == employee?.gradeId}"
+                                    th:text="${empGrade.gradeName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_office_id">Office
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_office_id"
+                                name="officeId">
+                            <option th:each="empOffice : ${employeeOfficeList}"
+                                    th:value="${empOffice.secOfficeId}"
+                                    th:selected="${empOffice.secOfficeId == employee?.officeId}"
+                                    th:text="${empOffice.name}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_divdept_id">Div/Dept
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_divdept_id"
+                                name="divdeptId">
+                            <option th:each="empDiv : ${employeeDivDeptList}"
+                                    th:value="${empDiv.lookupId}"
+                                    th:selected="${empDiv.lookupId == employee?.divdeptId}"
+                                    th:text="${empDiv.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_bank_acc_id">Bank Acc
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12"
+                               name="bankAccountNo" id="emp_bank_acc_id" type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_bank_name_id">Bank Name
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_bank_name_id"
+                                name="bankId">
+                            <option th:each="bank : ${bankList}"
+                                    th:value="${bank.lookupId}"
+                                     th:text="${bank.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_branch_name_id">Branch Name
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_branch_name_id"
+                                name="branchId">
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12">Bank
+                        Acc Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input type="radio" name="bankAccountStatus"
+                               id="emp_acc_status_id_1" value="1" checked/>
+                        <label for="emp_acc_status_id_1"> Yes</label>
+                        <input type="radio" name="bankAccountStatus"
+                               id="emp_acc_status_id_2" value="0"/>
+                        <label for="emp_acc_status_id_2"> No</label>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_photo_id">User Photo
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" name="empPhoto"
+                               id="emp_photo_id" type="file"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_sig_id">User Signature
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12" name="empSig"
+                               id="emp_sig_id" type="file"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_photo_prev_id">Photo Preview
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <img style="display:none" id="emp_photo_prev_id" height="200"
+                             width="200" src="#" alt="your image"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_sig_prev_id">Sig Preview
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <img style="display:none" id="emp_sig_prev_id" src="#"
+                             height="80" width="250" alt="your sig"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="x_title">
+        <br/>
+        <h2>Job History
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="job_history_form">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_join_date_id">Joining Date
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12 datepicker"
+                               name="joinDt" id="emp_join_date_id"
+                               th:value="${#dates.format(employee.joinDt, 'dd/MM/yyyy')}"
+                               type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_conf_date_id">Confirmation Date
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12 datepicker"
+                               name="confirmDt" id="emp_conf_date_id"
+                               th:value="${#dates.format(employee.confirmDt, 'dd/MM/yyyy')}"
+                               type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_lpr_date_id">LPR Date
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12"
+                               th:value="${#dates.format(employee.lprDt, 'dd/MM/yyyy')}"
+                               name="lprDt" readonly id="emp_lpr_date_id" type="text"/>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_retire_date_id">Retirement Date
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <input class="form-control col-md-7 col-xs-12"
+                               name="retireDt" readonly id="emp_retire_date_id"
+                               th:value="${#dates.format(employee.retireDt, 'dd/MM/yyyy')}"
+                               type="text"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_act_status_id">Activity Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_act_status_id"
+                                name="activityCd">
+                            <option th:each="empActStatus : ${employeeActStatusList}"
+                                    th:value="${empActStatus.lookupId}"
+                                    th:text="${empActStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_status_id">Employee Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_status_id"
+                                name="employementStCd">
+                            <option th:each="empStatus : ${employeeStatusList}"
+                                    th:value="${empStatus.lookupId}"
+                                    th:text="${empStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_service_status_id">Service Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="emp_service_status_id"
+                                name="serviceCd">
+                            <option th:each="empServiceStatus : ${employeeServiceStatusList}"
+                                    th:value="${empServiceStatus.lookupId}"
+                                    th:text="${empServiceStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="emp_salary_payment_status_id">Salary Payment Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control"
+                                id="emp_salary_payment_status_id"
+                                name="">
+                            <option th:each="empSalaryPaymentServiceStatus : ${employeeSalaryPaymentServiceStatusList}"
+                                    th:value="${empSalaryPaymentServiceStatus.lookupId}"
+                                    th:text="${empSalaryPaymentServiceStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="pf_deduction_status_id">PF Deduction Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="pf_deduction_status_id"
+                                name="pfcDedStat">
+                            <option th:each="pfDeductionStatus : ${pfDeductionStatusList}"
+                                    th:value="${pfDeductionStatus.lookupId}"
+                                    th:selected="${pfDeductionStatus.lookupId == employee?.pfcDedStat}"
+                                    th:text="${pfDeductionStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="pf_type_id">PF Type
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="pf_type_id"
+                                name="">
+                            <option th:each="pfType : ${pfTypeList}"
+                                    th:value="${pfType.lookupId}"
+                                    th:text="${pfType.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-4 col-sm-4 col-xs-12"
+                           for="pension_payment_status_id">Pension Payment Status
+                    </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <select class="form-control" id="pension_payment_status_id"
+                                name="penPayStat">
+                            <option th:each="pensionPaymentStatus : ${pensionPaymentStatusList}"
+                                    th:value="${pensionPaymentStatus.lookupId}"
+                                    th:selected="${pensionPaymentStatus.lookupId == employee?.penPayStat}"
+                                    th:text="${pensionPaymentStatus.displayName}"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: right">
+            <div class="item form-group">
+                <div th:switch="${permissionCheck.addPermit}">
+                    <button th:case="1" type="submit" class="btn btn-success">
+                        Submit
+                    </button>
+                    <input type="button" class="btn btn-primary" id="refreshButton"
+                           value="Refresh" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div layout:fragment="css">
+    <!--<link href="../css/security/office.css" rel="stylesheet">-->
+    <link href="../css/error.css" rel="stylesheet">
+</div>

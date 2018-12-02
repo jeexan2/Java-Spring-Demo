@@ -1,0 +1,130 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en"-->
+      <!--xmlns="http://www.w3.org/1999/xhtml"-->
+      <!--xmlns:th="http://www.thymeleaf.org"-->
+      <!--xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+      <!--layout:decorator="/common/layout/base">-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="common/layout/base">
+<head>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet"  type='text/css'>
+</head>
+<div layout:fragment="content">
+    <p th:text="${gradeData}"></p>
+    <div class="x_title">
+        <h2><small>HRM Admin > Grade Setup </small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <form name="addForm" class="form-horizontal form-label-left" id="addButton" th:action="@{/grade/page}"
+          th:object="${grade}" method="post">
+        <span class="section">Grade Entry</span>
+        <div class="form-group">
+            <div class="col-md-6 col-md-offset-3">
+                <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Grade Name<span
+                            class="required"></span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="name" class="form-control col-md-7 col-xs-12"  name="gradeName" placeholder="" type="text" required="required" />
+                        <span class="nameError"></span>
+                        <input type="hidden" id="id" value="-1" name="gradeId"  />
+                    </div>
+                </div>
+                <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="shortName">Grade Short Name <span
+                            class="required"></span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="shortName" class="form-control col-md-7 col-xs-12" name="shortName" required="required" placeholder=""
+                               type="text"/><span class="nameError"></span>
+                        <input type="hidden" id="id" value="-1" name="gradeId"/>
+                    </div>
+                </div>
+                <!--<div class="item form-group">-->
+                    <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Status-->
+                    <!--</label>-->
+                    <!--<div class="col-md-6 col-sm-6 col-xs-12" id="isActive">-->
+                        <!--<label><input type="radio" name="isActive" value="1" checked="checked"> Active </label>-->
+                        <!--<label><input type="radio" name="isActive" value="0"> Inactive </label>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="item form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Status
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12" id="isActiv" name="isActiv">
+                        <input type="radio"  id="isActiveYes" name="isActive" th:value="1" th:text="Active"/>
+                        <input type="radio"  id="isActiveNo" name="isActive" th:value="0" th:text="Inactive"/>
+                    </div>
+                </div>
+
+                <!--<div class="item form-group">-->
+                    <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Active-->
+                    <!--</label>-->
+                    <!--<div class="col-md-6 col-sm-6 col-xs-12" id="isActive" name="isActive">-->
+                        <!--<input type="radio"  th:field="*{isActive}" th:value="1" th:text="YES">-->
+                        <!--<input type="radio"  th:field="*{isActive}" th:value="0" th:text="NO">-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-md-offset-3">
+                        <button type="submit" class="btn btn-success" name="save" value="save">Save</button>
+                        <input type="button" class="btn btn-primary"  id="refreshButton" th:value="Refresh"  onclick="formRefresh()">
+                    </div>
+                </div>
+            </div>
+            <div class="x_content" id="tableOffice">
+
+                <table id="listTable" class="table table-striped table-bordered bulk_action">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Grade Name</th>
+                        <th>Grade Short Name</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="grd : ${grades}">
+                        <td class="gradeID" th:text="${grd.gradeId}"></td>
+                        <td class="gradeName" th:text="${grd.gradeName}"></td>
+                        <td th:text="${grd.shortName}"></td>
+                        <!--<td th:text="${grd.isActive}"></td>-->
+                        <td>
+                            <span th:if="${grd.isActive == 1}">Active</span>
+                            <span th:if="${grd.isActive == 0}">Inactive</span>
+                        </td>
+                        <td>
+                            <!--<input type="button" class="btn btn-danger"  id="deleteButton" th:value="Delete" th:attr="data-id=${grd.gradeId}" onclick="formDelete(this)">-->
+                            <!--<input type="button" class="btn btn-info" id="editButton" th:value="Edit"-->
+                                   <!--th:attr="data-id=${grd.gradeId}" onclick="formEdit(this)">-->
+                            <div class="col-xs-6 previous">
+                                <a class="btn btn-info" id="editButton" th:value="Edit" th:attr="data-id=${grd.gradeId}" onclick="formEdit(this)"><i class="fa fa-pencil"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </form>
+    </div>
+</div>
+</div>
+
+<div layout:fragment="script">
+    <script src="../js/hrm_admin/grade.js"></script>
+</div>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<form th:fragment="address_form_part" name="form_general" class="form-horizontal form-label-left"  id="employeeAddressForm"
+      action="/hrm_admin/employee_address_setup" modelAttribute="employeeAddressModel" enctype="multipart/form-data" method="POST">
+
+        <div class="general_form">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="presentAddress">Mailing Address
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <textarea class="form-control" rows="3"
+                                  name="presentAddress" id="presentAddress"></textarea>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="presentDivisionId">Mailing Division
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="presentDivisionId"
+                                    name="presentDivisionId">
+                                <option value="-1" >Select Division</option>
+                                <option th:each="dvsn : ${divisionList}"
+                                        th:value="${dvsn.divisionId}"
+                                        th:text="${dvsn.divisionName}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="presentDistrictId">Mailing District
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="presentDistrictId"
+                                    name="presentDistrictId">
+                                <!--<option value="-1">Select District</option>-->
+                                <!--<option th:each="dstct : ${districtList}"-->
+                                        <!--th:value="${dstct.districtId}"-->
+                                        <!--th:text="${dstct.districtName}"></option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="presentThanaId">Mailing Thana
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="presentThanaId"
+                                    name="presentThanaId" data-id="noLoad">
+                                <!--<option value="-1">Select Thana</option>-->
+                                <!--<option th:each="thana : ${thanaList}"-->
+                                        <!--th:value="${thana.thanaId}"-->
+                                        <!--th:text="${thana.thanaName}"></option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="presentPhoneNumber">Mailing Phone Number
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input class="form-control"
+                                      name="presentPhoneNumber" id="presentPhoneNumber"
+                            />
+                        </div>
+                    </div>
+            </div>
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="permanentAddress">Permanent Address
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <textarea class="form-control" rows="3"
+                                      name="permanentAddress" id="permanentAddress"></textarea>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="permanentDivisionId">Permanent Division
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="permanentDivisionId"
+                                    name="permanentDivisionId">
+                                <option value="-1" >Select Division</option>
+                                <option th:each="dvsn : ${divisionList}"
+                                        th:value="${dvsn.divisionId}"
+                                        th:text="${dvsn.divisionName}"></option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="permanentDistrictId">Permanent District
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="permanentDistrictId"
+                                    name="permanentDistrictId">
+                                <!--<option value="-1">Select District</option>-->
+                                <!--<option th:each="dstct : ${districtList}"-->
+                                        <!--th:value="${dstct.districtId}"-->
+                                        <!--th:text="${dstct.districtName}"></option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="permanentThanaId">Permanent Thana
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <select class="form-control" id="permanentThanaId"
+                                    name="permanentThanaId" data-id="noLoad">
+                                <!--<option value="-1">Select Thana</option>-->
+                                <!--<option th:each="thana : ${thanaList}"-->
+                                        <!--th:value="${thana.thanaId}"-->
+                                        <!--th:text="${thana.thanaName}"></option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                               for="permanentPhoneNumber">Permanent Phone Number
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input class="form-control"
+                                   name="permanentPhoneNumber" id="permanentPhoneNumber"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    <br/>
+    <div class="x_title">
+        <br/>
+        <h2>Country Related Information
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="general-form">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="nationalityId">Nationality
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <select class="form-control" id="nationalityId"
+                            name="nationalityId" data-id="noLoad">
+                        <option value="-1">Select Nationality</option>
+                        <option th:each="nationality : ${countryList}"
+                                th:value="${nationality.countryId}"
+                                th:text="${nationality.nationality}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-gorup">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="countryId">Country
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <select class="form-control" id="countryId"
+                            name="countryId" data-id="noLoad">
+                        <option value="-1">Select Country</option>
+                        <option th:each="country : ${countryList}"
+                                th:value="${country.countryId}"
+                                th:text="${country.countryName}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <br/>
+    <div class="x_title">
+        <br/>
+        <h2> Digital Address
+        </h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="general-form">
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="cellNumber">Cell
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input class="form-control"
+                           name="cellNumber" id="cellNumber"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="fax">Fax
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input class="form-control"
+                           name="fax" id="fax"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="email">Email
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input class="form-control"
+                           name="email" id="email"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-xs-6">
+            <div class="item form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                       for="url">URL
+                </label>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <input class="form-control"
+                           name="url" id="url"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-2 col-xs-2">
+        </div>
+        <div class="col-md-10 col-sm-10 col-xs-10" style="text-align: right">
+            <div class="item form-group">
+                <div th:switch="${permissionCheck.addPermit}">
+                    <button th:case="1" type="submit" class="btn btn-success">
+                        Submit
+                    </button>
+                    <input type="button" class="btn btn-primary" id="refreshButton"
+                           value="Refresh" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

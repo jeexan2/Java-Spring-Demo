@@ -1,0 +1,153 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<script src="../js/jquery.min.js"></script>-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<title>Option</title>-->
+<!--</head>-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+    <div class="" addOption="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form name="optionSetupForm" class="form-horizontal form-label-left" id="option-setup"
+                              action="/security/addoption" method='POST' modelAttribute="add-option">
+                            <!--<form name="optionSetupForm" class="form-horizontal form-label-left" id="option-setup" th:action="@{/security/addoption}" method='POST' th:object="${add-option}">-->
+                            <!--<form id="option-setup" name='option' action="/security/addoption" method='POST' modelAttribute="add-option">-->
+                            <span class="section"> Module/Sub-module/Option Setup Form</span>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="selectOption"> Select
+                                    Type*
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" id="selectOption" name="selectOption">
+                                    <input type="radio" name="selectOption" class="radio-button" checked id="module"
+                                           value="1" th:text="Module">
+                                    <br>
+                                    <input type="radio" name="selectOption" class="radio-button" id="subModule"
+                                           value="2" th:text="Sub-module">
+                                    <br>
+                                    <input type="radio" name="selectOption" class="radio-button" id="option" value="3"
+                                           th:text="Option">
+                                    <input type="hidden" id="hiddedId" value="-1" name="id">
+                                </div>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"> Name <span
+                                        class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="name" class="form-control col-md-7 col-xs-12" name="name" placeholder=""
+                                           type="text"/>
+                                    <!--<input type="hidden" id="id" value="-1" name="name"  />-->
+                                </div>
+                            </div>
+
+                            <!-- Display Name -->
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="display-name"> Display
+                                    Name <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="display-name" class="form-control col-md-7 col-xs-12" name="displayName"
+                                           placeholder="" type="text"/>
+                                    <!--<input type="hidden" id="id" value="-1" name="name"  />-->
+                                </div>
+                            </div>
+
+                            <!-- Access URL -->
+                            <div class="item form-group" id="access-id">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="access-url"> Access URL
+                                    <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="access-url" class="form-control col-md-7 col-xs-12" name="accessUrl"
+                                           placeholder="" type="text"/>
+                                    <!--<input type="hidden" id="id" value="-1" name="name"  />-->
+                                </div>
+                            </div>
+
+                            <div class="item form-group" id="module-select-id">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="module-dropdown">Select
+                                    Module
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="selectedModule" id="module-dropdown"> </select>
+                                </div>
+                            </div>
+
+                            <div class="item form-group" id="subModule-select-id">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="subModule-dropdown">Select
+                                    Sub Module
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="selectedSubModule" id="subModule-dropdown">
+                                        <option class="placeholder" selected disabled value="">Select Sub-module
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="activeStatus">Is Active?
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="checkbox" id="activeStatus" name="active" value="isActive"><br>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3" th:switch="${permissionCheck.addPermit}">
+                                    <!--<button type="submit" class="btn btn-success" name="add" id="add" value="add">Add</button>-->
+                                    <button th:case="1" type="submit" class="btn btn-success" name="submit" id="submitButton"
+                                            value="add">Add
+                                    </button>
+                                    <input type="button" class="btn btn-primary" id="refreshButton" value="Refresh">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="x_content">
+                        <span class="section"> Tree View </span>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <div class="tree-menu demo" id="tree-menu">
+                                </div>
+                            </div>
+                            <footer>
+                                <div class="pull-right">
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </footer>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="script">
+    <script src="/js/jquery.ntm.js"></script>
+    <script src="/js/security/addOption.js"></script>
+</div>
+<div layout:fragment="css">
+    <link href="../css/Security/add-option.css" rel="stylesheet">
+</div>

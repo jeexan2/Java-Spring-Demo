@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+</head>
+<body>
+<br/>
+<br/>
+<h3 style="text-align: center">Hello <label style="color: blue;" th:text="${user_name}" /></h3>
+<div id="login-box">
+<form name='login' action="/j_spring_security_check" method='POST'>
+    <table>
+        <tr>
+            <td>Password:</td>
+            <td><input type='password' name='password' /></td>
+            <td><input type='hidden' name='username' th:value=${user_token} /></td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="Login" /></td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+<style>
+    #login-box {
+        width: 400px;
+        padding: 20px;
+        margin: 100px auto;
+        background: #fff;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border: 1px solid #000;
+    }
+</style>
+</html>

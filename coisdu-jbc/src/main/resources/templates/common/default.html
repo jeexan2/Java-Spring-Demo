@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Default title for my pages</title>
+
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/bootstrap/3.3.6/css/bootstrap-theme.min.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        here
+        <div class="col-md-3"></div>
+        <div class="col-md-6" layout:fragment="content">
+            Page content goes here
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<th:block layout:fragment="scripts"></th:block>
+</body>
+</html>

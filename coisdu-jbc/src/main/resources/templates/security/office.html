@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="common/layout/base">
+<head>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet"  type='text/css'>
+</head>
+<div layout:fragment="content">
+    <div class="" office="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small>System & Settings > Office Setup </small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div  id="success">
+
+                        </div>
+                        <form name="addForm" class="form-horizontal form-label-left" id="addForm" th:action="@{/security/office}" th:object="${office}" method="post">
+                            <span class="section">Office Setup Form</span>
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Office Name <span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" name="name"
+                                                   id="name"
+                                                   type="text"/>
+                                            <input type="hidden" id="id" value="-1" name="secOfficeId"  />
+                                            <input type="hidden" id="rowId" value="-1" name="rowId"  />
+
+                                        </div>
+
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="shortName">Short Name<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" name="shortName"
+                                                   id="shortName"
+                                                   type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <textarea class="form-control" rows="3" name="address" id = "address"></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" name="email"
+                                                   id="email"
+                                                   type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contactNumber">Contact Number<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" name="contactNumber"
+                                                   id="contactNumber"
+                                                   type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Active<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12" id="isActive" name="isActive">
+                                            <input type="radio"  th:field="*{isActive}" th:value="1" th:text="YES">
+                                            <input type="radio"  th:field="*{isActive}" th:value="0" th:text="NO">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="category">Category<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <select  class="form-control" th:field="*{category}" id="category" name="category">
+                                                <option th:each = "cat : ${categoryList}" th:value="${cat.value}" th:text="${cat.displayName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="divisionId">Division<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <select  class="form-control"  id="divisionId" name="divisionId">
+                                                <option th:value="-1">Select Division</option>
+                                                <option th:each = "dv : ${divisionList}" th:value="${dv.divisionId}" th:text="${dv.divisionName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="districtId">District<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <select  class="form-control" th:field="*{districtId}" id="districtId" name="districtId" data-id="onLoad">
+                                                <option th:each = "dstrct : ${districtList}" th:value="${dstrct.districtId}" th:text="${dstrct.districtName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="thanaId">Thana<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <select  class="form-control" th:field="*{thanaId}" id="thanaId" name="thanaId" data-id="onLoad">
+                                                <option th:each = "thn : ${thanaList}" th:value="${thn.thanaId}" th:text="${thn.thanaName}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="postCode">Post Code<span>*</span>
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input class="form-control col-md-7 col-xs-12" name="postCode"
+                                            id="postCode"
+                                            type="text"/>
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">Description
+                                        </label>
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <textarea class="form-control" rows="3" name="description" id = "description"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="col-md-6">
+                                <div th:switch="${permissionCheck.addPermit}">
+                                    <button th:case="1" type="submit" class="btn btn-success" name="add" id="add" value="add">Save</button>
+                                    <input type="button" class="btn btn-primary"  id="refreshButton" th:value="Refresh"  onclick="formRefresh()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="clearfix"></div>
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" id="tableOffice">
+                                    <table id="datatable" class="table table-striped table-bordered bulk_action dataTable no-footer" >
+                                        <thead>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Office Name</th>
+                                            <th> Short Name</th>
+                                            <th>Division Name</th>
+                                            <th>District Name</th>
+                                            <th>Thana Name</th>
+                                            <th>Address</th>
+                                            <th style="width:88px;">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="office : ${officeDataTable}">
+                                            <td class="rowId" th:id="${'office-row-' + office.rowId}" th:text="${office.rowId}"></td>
+                                            <!--<td class="officeId"th:text="${office.secOfficeId}" ></td>-->
+                                            <td class="officeName" th:text="${office.officeName}"></td>
+                                            <td class="officeShortName"th:text="${office.shortName} != null? ${office.shortName} : ${dataUnavailable} "></td>
+                                            <td class="officeDivisionName" th:text="${office.divisionName} != null? ${office.divisionName}: ${dataUnavailable}"></td>
+                                            <td class="officeDistrictName" th:text="${office.districtName} != null? ${office.districtName}: ${dataUnavailable}"></td>
+                                            <td class="officeThanaName" th:text="${office.thanaName} != null? ${office.thanaName}: ${dataUnavailable}"></td>
+                                            <td class="officeAddress" th:text="${office.address} != null? ${office.address} : ${dataUnavailable}"></td>
+                                            <td>
+                                                <div class="col-xs-6 previous" th:switch="${permissionCheck.editPermit}">
+                                                    <a th:case="1" class="btn btn-success" id="editButton" th:value="Edit"  th:attr="data-id=${office.secOfficeId} + ' '+${office.rowId}" onclick="formEdit(this)"><i class="fa fa-pencil"></i></a>
+                                                </div>
+                                                <div class="col-xs-6 next" th:switch="${permissionCheck.deletePermit}">
+                                                    <a th:case="1" class="btn btn-danger" id="deleteButton" th:value="Delete" th:attr="data-id=${office.secOfficeId}+ ' '+${office.rowId}" onclick="formDelete(this)"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div layout:fragment="script">
+    <script src="../js/security/officeValidation.js"></script>
+    <script src="../js/security/office.js"></script>
+    <!--<script src="../js/validate.js"></script>-->
+</div>
+<div layout:fragment="css">
+    <link href="../css/security/office.css" rel="stylesheet">
+</div>

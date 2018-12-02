@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.sit.jbc</groupId>
+	<artifactId>coisdu-jbc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>coisdu-jbc</name>
+	<description>Customization of Online Insurance System and Database Upgradation of Jiban Bima Corporation</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.0.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+        <!--<start-class>com.sit.jbc.CoisduJbcApplication</start-class>-->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+        <!-- ojdbc8.jar  -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>12.2.0.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+		<!-- jjwt dependency -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
+		</dependency>
+		<!--common codec-->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.11</version>
+		</dependency>
+		<!-- thymeleaf -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
+		</dependency>
+		<!-- logger -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<optional>true</optional>
+		</dependency>
+    </dependencies>
+
+	<build>
+        <!--<finalName>coisdu-jbc</finalName>-->
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-install-plugin</artifactId>-->
+				<!--<version>2.4</version>-->
+				<!--<executions>-->
+					<!--<execution>-->
+					<!--<id>execution-of-ojdbc</id>-->
+					<!--<phase>initialize</phase>-->
+					<!--<goals>-->
+					<!--<goal>install-file</goal>-->
+					<!--</goals>-->
+					<!--<configuration>-->
+					<!--<groupId>com.oracle</groupId>-->
+					<!--<artifactId>ojdbc8</artifactId>-->
+					<!--<version>12.2.0.1.0</version>-->
+					<!--<packaging>jar</packaging>-->
+					<!--<file>${basedir}/lib/ojdbc8.jar</file>-->
+					<!--</configuration>-->
+					<!--</execution>-->
+				<!--</executions>-->
+			<!--</plugin>-->
+		</plugins>
+	</build>
+
+
+
+
+</project>

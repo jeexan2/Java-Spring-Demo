@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Login</title>
+</head>
+<body>
+<br/>
+<br/>
+<h3 style="text-align: center">Login User</h3>
+<br/>
+<div style="text-align: center">
+    <label style="color: red;" th:text="${error}" />
+    <label style="color: blue;" th:text="${logout}" />
+    <label style="color: red;" th:text="${expired}" />
+</div>
+<div id="login-box">
+<form name='login' action="/security/login-user" method='POST' modelAttribute="login-user">
+    <table>
+        <tr>
+            <td>User:</td>
+            <td><input type='text' name='username' value=''/></td>
+        </tr>
+        <tr>
+            <td>Office Category:</td>
+            <td>
+            </td>
+        </tr>
+        <tr th:each="officeCategory : ${officeCategoryList}">
+            <td><input type="radio" name="officeCategory" th:id="${'officeCategory' + officeCategory.lookupId}"
+                   th:value="${officeCategory.lookupId}"  >
+                <label th:for="${'officeCategory' + officeCategory.lookupId}"
+                       th:text="${officeCategory.displayName}"> </label>
+            </td>
+        </tr>
+        <tr>
+            <td><input name="submit" type="submit" value="Next" /></td>
+        </tr>
+    </table>
+</form>
+</div>
+</body>
+<style>
+    #login-box {
+        width: 400px;
+        padding: 20px;
+        margin: 100px auto;
+        background: #fff;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border: 1px solid #000;
+    }
+</style>
+</html>

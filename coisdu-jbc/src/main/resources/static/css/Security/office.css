@@ -1,0 +1,50 @@
+#btn{
+    background-color: #e5e5e5;
+    color: #2f8cb9;
+    border-style: solid;
+    border-style-color: #171435;
+}
+
+#dialogoverlay{
+    display: none;
+    opacity: .8;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #FFF;
+    width: 100%;
+    z-index: 10;
+}
+#dialogbox{
+    display: none;
+    position: fixed;
+    background: #000;
+    border-radius:7px;
+    width:550px;
+    z-index: 10;
+}
+.emailError,.contactNumberError{
+    display: none;
+    margin-left: 10px;
+    color:red;
+}
+.required{
+    color:red
+}
+#dialogbox > div{ background:#FFF; margin:8px; }
+#dialogbox > div > #dialogboxhead{ background: #666; font-size:19px; padding:10px; color:#CCC; }
+#dialogbox > div > #dialogboxbody{ background:#333; padding:20px; color:#FFF; }
+#dialogbox > div > #dialogboxfoot{ background: #666; padding:10px; text-align:right; }
+.error {
+    color: red;
+    margin-left: 5px;
+}
+
+label.error {
+    display: inline;
+
+}
+
+.form-horizontal .control-label{
+    text-align:left !important;
+}

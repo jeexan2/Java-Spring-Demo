@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="common/layout/base">
+<head>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet"  type='text/css'>
+</head>
+<div layout:fragment="content">
+    <div class="x_title">
+        <h2><small>hrm_admin > Designation Setup </small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <form name="addForm" class="form-horizontal form-label-left" id="addButton" th:action="@{/hrm_admin/desigSetup}"
+              th:object="${designation}" method="post">
+            <span class="section">Designation Entry</span>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Designation Name<span
+                                class="required"></span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="name" class="form-control col-md-7 col-xs-12"  name="designationName" placeholder="" type="text" required="required" />
+                            <span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="designationId"  />
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="designationShortName">Designation Short Name <span
+                                class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="designationShortName" class="form-control col-md-7 col-xs-12" name="designationShortName" required="required" placeholder=""
+                                   type="text"/><span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="designationId"/>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="employmentTypeId">Employment Type <span
+                                class="required"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="employmentTypeId" class="form-control col-md-7 col-xs-12" name="employmentTypeId" required="required" placeholder=""
+                                   type="text"/><span class="nameError"></span>
+                            <input type="hidden" id="id" value="-1" name="designationId"/>
+                        </div>
+                    </div>
+                    <!--<div class="item form-group">-->
+                        <!--<label class="control-label col-md-3 col-sm-3 col-xs-12" for="employeeTypeId">Employee Type <span-->
+                                <!--class="required"></span>-->
+                        <!--</label>-->
+                        <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+                            <!--<input id="employeeTypeId" class="form-control col-md-7 col-xs-12" name="employeeTypeId" required="required" placeholder=""-->
+                                   <!--type="text"/><span class="nameError"></span>-->
+                            <!--<input type="hidden" id="id" value="-1" name="designationId"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="employeeTypeId">Employee Type
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select  class="form-control"  id="employeeTypeId" name="employeeTypeId">
+                                <option th:each = "emp : ${empleeList}" th:value="${emp.value}" th:text="${emp.displayName}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="isActive">Status
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="isActiv" name="isActiv">
+                            <input type="radio"  id="isActiveYes" name="isActive" th:value="1" th:text="Active"/>
+                            <input type="radio"  id="isActiveNo" name="isActive" th:value="0" th:text="Inactive"/>
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                            <button type="submit" class="btn btn-success" name="save" value="save">Save</button>
+                            <input type="button" class="btn btn-primary"  id="refreshButton" th:value="Refresh"  onclick="formRefresh()">
+                        </div>
+                    </div>
+                </div>
+                <div class="x_content" id="tableOffice">
+
+                    <table id="listTable" class="table table-striped table-bordered bulk_action">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Designation Name</th>
+                            <th>Designation Short Name</th>
+                            <!--<th>Nationality</th>-->
+                            <!--<th>Phone Code</th>-->
+                            <th>Entry Type</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:each="desig : ${designations}">
+                            <td class="designationId" th:text="${desig.designationId}"></td>
+                            <td class="designationName" th:text="${desig.designationName}"></td>
+                            <td th:text="${desig.designationShortName}"></td>
+                            <!--<td th:text="${desig.nationality}"></td>-->
+                            <!--<td th:text="${desig.phoneCode}"></td>-->
+                            <td>
+                                <span th:if="${desig.isMigrated == 1}">Migrated</span>
+                                <span th:if="${desig.isMigrated == 0}">New</span>
+                            </td>
+                            <td>
+                                <span th:if="${desig.isActive == 1}">Active</span>
+                                <span th:if="${desig.isActive == 0}">Inactive</span>
+                            </td>
+                            <td>
+                                <div class="col-xs-6 previous">
+                                    <a class="btn btn-info" id="editButton" th:value="Edit" th:attr="data-id=${desig.designationId}" onclick="formEdit(this)"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+</div>
+
+<div layout:fragment="script">
+    <script src="../js/hrm_admin/designation.js"></script>
+</div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/common/layout/base">
+<head>
+    <title>Test</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div>list....
+        <div th:utext="${tree}" />
+    </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+    <script src="/js/hello.js"></script>
+</th:block>
+</html>

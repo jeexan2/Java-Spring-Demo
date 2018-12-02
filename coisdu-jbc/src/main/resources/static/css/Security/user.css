@@ -1,0 +1,7 @@
+.field-icon {
+    float: right;
+    margin-top:-25px;
+}
+#lockedReasonHidden,#inActiveReasonHidden{
+    display:none;
+}

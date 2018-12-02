@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="common/layout/base">
+
+<div layout:fragment="content">
+    <div class="" addOption="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <form name="rolePermissionForm" class="form-horizontal form-label-left" id="role-permission"
+                              action="/security/user_role_permission" method='POST' modelAttribute="role-permission">
+                            <span class="section"> User Role Permission Setup Form</span>
+
+                            <div class="item form-group" id="role-select-id">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="role-dropdown">Select Role
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="selectedRole" id="role-dropdown"> </select>
+                                </div>
+                                <input type="hidden" id="hiddedId" value="-1" name="id">
+                            </div>
+
+                            <div class="item form-group" id="module-select-id">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="module-dropdown">Select Module
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select class="form-control" name="selectedModule" id="module-dropdown"> </select>
+                                </div>
+                            </div>
+
+                            <!--<span class="section"> Tree View </span>-->
+
+                            <div id="tree">
+                            </div>
+
+                            <!--<div id="tree">-->
+                            <!--<ul>-->
+                            <!--<li data-type="module" data-id="5">-->
+                            <!--<a><input type="checkbox" id="moduleStatus" name="moduleStatus" value="moduleCheck">123<br></a>-->
+                            <!--<ul>-->
+                            <!--<li data-type="subModule" data-id="32">-->
+                            <!--<a><input type="checkbox" name="subModuleStatus" value="subModuleCheck">submodule 6<br></a>-->
+                            <!--<ul>-->
+                            <!--<li data-type="option" data-id="25" data-submodid="32">-->
+                            <!--<input type="hidden" name="optionId" value="25">-->
+                            <!--<input type="hidden" name="addOrEdit" value="Add">-->
+                            <!--<a>-->
+                            <!--<input type="hidden" name="optionStatus" value="0">-->
+                            <!--<label class="container">Lookup  Setup-->
+                            <!--<input type="checkbox" name="optionStatus" value="1">-->
+                            <!--<span class="checkmark"></span>-->
+                            <!--</label>-->
+
+                            <!--<input type="hidden" name="addPermission" value="0">-->
+                            <!--<label class="container">Can Add-->
+                            <!--<input type="checkbox" data-id="25" name="addPermission" value="1">-->
+                            <!--<span class="checkmark"></span>-->
+                            <!--</label>-->
+
+                            <!--<input type="hidden" name="editPermission" value="0">-->
+                            <!--<label class="container">Can Edit-->
+                            <!--<input type="checkbox" data-id="25" name="editPermission" value="1">-->
+                            <!--<span class="checkmark"></span>-->
+                            <!--</label>-->
+
+                            <!--<input type="hidden" name="deletePermission" value="0">-->
+                            <!--<label class="container">Can Delete-->
+                            <!--<input type="checkbox" data-id="25" name="deletePermission" value="1">-->
+                            <!--<span class="checkmark"></span>-->
+                            <!--</label>-->
+
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+                            <!--</div>-->
+
+
+
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="submit" class="btn btn-success" name="submit" id="submitButton" value="submit" style="display: inline-block;">Submit
+                                    </button>
+                                    <input type="button" class="btn btn-primary" id="refreshButton" value="Refresh">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="x_content">
+                        <!--<span class="section"> Tree View </span>-->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                                <!--<div id="tree">-->
+                                <!--</div>-->
+
+                            </div>
+                            <footer>
+                                <div class="pull-right">
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </footer>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div layout:fragment="script">
+    <script src="/js/jquery.ntm.js"></script>
+    <script src="/js/security/user_role_permission.js"></script>
+</div>
+<div layout:fragment="css">
+    <link href="../css/Security/user_role_permission.css" rel="stylesheet">
+</div>

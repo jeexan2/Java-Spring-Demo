@@ -1,0 +1,109 @@
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorator="common/layout/base">
+<head>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+          rel="stylesheet"  type='text/css'>
+</head>
+<div layout:fragment="content">
+    <div class="" division="main">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><small> Generic > Division Setup </small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <form name="addDivisionForm" class="form-horizontal form-label-left" id="addDivisionForm" th:action="@{/generic/division}" th:object="${division}" method="post">
+                            <span class="section">Division Setup Form</span>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="divisionName">Division Name
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="divisionName" class="form-control col-md-7 col-xs-12"  name="divisionName" placeholder="" type="text" /> <!--th:field="*{name}" !-->
+                                    <input type="hidden" id="id" value="-1" name="divisionId"/>
+                                </div>
+                            </div>
+                            <div class="item form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="shortName">Short Name
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="shortName" class="form-control col-md-7 col-xs-12"  name="shortName" placeholder="" type="text" /> <!--th:field="*{name}" !-->
+                                </div>
+                            </div>
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <button type="submit" class="btn btn-success" name="add" id="add" value="add">Add</button>
+                                    <input type="button" class="btn btn-primary"  id="refreshButton" th:value="Refresh"  onclick="formRefresh()">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="x_content">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="" id="tableOffice">
+                                    <table id="datatable" class="table table-striped table-bordered bulk_action dataTable no-footer">
+                                        <thead>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>NAME</th>
+                                            <th>Short Name</th>
+                                            <th style="width:88px;">ACTIONS</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="division : ${divisionTableData}">
+                                            <td class="rowId" th:id="${'division-row-' + division.rowId}" th:text="${division.rowId}"></td>
+                                            <td class="name" th:text="${division.name} != null? ${division.name}: ${dataUnavailable}"></td>
+                                            <td class="divShortName" th:text="${division.shortName} != null? ${division.shortName}: ${dataUnavailable}"></td>
+                                            <td>
+                                                <div class="col-xs-6 previous">
+                                                    <a class="btn btn-success" id="editButton" th:value="Edit" th:attr="data-id=${division.divisionId}" onclick="formEdit(this)"><i class="fa fa-pencil"></i></a>
+                                                </div>
+                                                <div class="col-xs-6 next">
+                                                    <a class="btn btn-danger" id="deleteButton" th:value="Delete" th:attr="data-id=${division.divisionId}+ ' '+${division.rowId}" onclick="formDelete(this)"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div layout:fragment="script">
+    <!-- Alert Bootbox !-->
+    <script src="../js/jquery-confirm.js"></script>
+    <script src="../js/jquery-confirm.js"></script>
+    <!--<script src="../js/jquery-min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <!--Office !-->
+    <script src="../js/generic/division.js"></script>
+    <script src="../js/validate.js"></script>
+
+
+</div>
+<div layout:fragment="css">
+    <link href="../css/generic/division.css" rel="stylesheet">
+</div>
+</html>
